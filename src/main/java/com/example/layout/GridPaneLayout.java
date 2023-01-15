@@ -14,8 +14,8 @@ public class GridPaneLayout extends GridPane {
 
     private Hashtable<Animal, Button> decoButtons;
     Button undoBtn;
-    private Button soundBtn;
-
+    // private Button soundBtn;
+    
     public GridPaneLayout() {
         menuBackground();
         button();
