@@ -14,7 +14,7 @@ public class GridPaneLayout extends GridPane {
 
     private Hashtable<Animal, Button> decoButtons;
     Button undoBtn;
-    private Button soundBtn;
+    // private Button soundBtn;
     
     public GridPaneLayout() {
         menuBackground();
@@ -46,12 +46,12 @@ public class GridPaneLayout extends GridPane {
         Button giraffe = new Button();
         Button panda = new Button();
 
-        tiger.setMaxWidth(100);
-        lion.setMaxWidth(100);
-        monkey.setMaxWidth(100);
-        bird.setMaxWidth(100);
-        giraffe.setMaxWidth(100);
-        panda.setMaxWidth(100);
+        tiger.setMaxWidth(Double.MAX_VALUE);
+        lion.setMaxWidth(Double.MAX_VALUE);
+        monkey.setMaxWidth(Double.MAX_VALUE);
+        bird.setMaxWidth(Double.MAX_VALUE);
+        giraffe.setMaxWidth(Double.MAX_VALUE);
+        panda.setMaxWidth(Double.MAX_VALUE);
 
         // undoBtn.setOnAction(e -> undoCommand());
         // soundBtn = new MenuButton("Pause Music");
