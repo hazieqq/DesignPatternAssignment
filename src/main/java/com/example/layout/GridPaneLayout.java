@@ -1,9 +1,9 @@
 package com.example.layout;
 
-import java.util.Hashtable;
+import java.util.*;
 
 import com.example.App;
-import com.example.animalConstant.Animal;
+import com.example.animal.Animal;
 
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -12,7 +12,7 @@ import javafx.scene.layout.*;
 
 public class GridPaneLayout extends GridPane {
 
-    private Hashtable<Animal, Button> decoButtons;
+    private HashMap<Animal, Button> animalbuttons;
     Button undoBtn;
     // private Button soundBtn;
     
@@ -56,30 +56,30 @@ public class GridPaneLayout extends GridPane {
         giraffe.setMaxWidth(100);
         panda.setMaxWidth(100);
 
-        VBox vbuttons = new VBox();
-        vbuttons.setSpacing(5);
-        vbuttons.setPadding(new Insets(10, 10, 10, 10));
-        vbuttons.getChildren().addAll(tiger, lion, monkey, bird, giraffe, panda);
+        // VBox vbuttons = new VBox();
+        // vbuttons.setSpacing(5);
+        // vbuttons.setPadding(new Insets(10, 10, 10, 10));
+        // vbuttons.getChildren().addAll(tiger, lion, monkey, bird, giraffe, panda);
 
         // undoBtn.setOnAction(e -> undoCommand());
         // soundBtn = new MenuButton("Pause Music");
         // soundBtn.setOnAction(e -> executeCommand(new ToggleSound()));
 
-        decoButtons = new Hashtable<>();
-        decoButtons.put(Animal.tiger, tiger);
-        decoButtons.put(Animal.lion, lion);
-        decoButtons.put(Animal.monkey, monkey);
-        decoButtons.put(Animal.bird, bird);
-        decoButtons.put(Animal.giraffe, giraffe);
-        decoButtons.put(Animal.panda, panda);
-        for (Animal animal : decoButtons.keySet()) {
-            Button decoBtn = decoButtons.get(animal);
+        animalbuttons = new HashMap<>();
+        animalbuttons.put(Animal.tiger, tiger);
+        animalbuttons.put(Animal.lion, lion);
+        animalbuttons.put(Animal.monkey, monkey);
+        animalbuttons.put(Animal.bird, bird);
+        animalbuttons.put(Animal.giraffe, giraffe);
+        animalbuttons.put(Animal.panda, panda);
+        for (Animal animal : animalbuttons.keySet()) {
+            Button decoBtn = animalbuttons.get(animal);
             decoBtn.setText(animal.name());
             // decoBtn.setOnAction(e -> executeCommand(new
             // ToggleDecoVisibility(decoration)));
         }
 
-        this.addRow(0, decoButtons.get(Animal.tiger), decoButtons.get(Animal.lion), decoButtons.get(Animal.monkey));
-        this.addRow(1, decoButtons.get(Animal.bird), decoButtons.get(Animal.giraffe), decoButtons.get(Animal.panda));
+        this.addRow(0, animalbuttons.get(Animal.tiger), animalbuttons.get(Animal.lion), animalbuttons.get(Animal.monkey));
+        this.addRow(1, animalbuttons.get(Animal.bird), animalbuttons.get(Animal.giraffe), animalbuttons.get(Animal.panda));
     }
 }

@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import com.example.App;
 import com.example.Log.LoggerTestFactory;
-import com.example.animalConstant.*;
+import com.example.animal.*;
 
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
