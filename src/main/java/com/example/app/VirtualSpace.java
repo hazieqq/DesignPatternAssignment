@@ -1,29 +1,15 @@
 package com.example.app;
 
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.fxml.*;
-import javafx.geometry.Pos;
 
 import java.io.IOException;
 
-import com.example.App;
 import com.example.Log.Logger;
 import com.example.Log.LoggerFactory;
 import com.example.Log.LoggerTestFactory;
 import com.example.layout.Jungle;
-import com.example.layout.GridPaneLayout;
-import com.example.layout.MainSceneController;
-import com.example.layout.StackPaneLayout;
 
 
 public class VirtualSpace  {

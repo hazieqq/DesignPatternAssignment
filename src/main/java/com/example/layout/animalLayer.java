@@ -11,4 +11,8 @@ public class animalLayer extends ImageView {
         super(new Image(App.class.getResource(pathToImage).toExternalForm()));
         this.setVisible(visibility);
     }
+
+    public animalLayer(String pathToImage) {
+        super(new Image(App.class.getResource(pathToImage).toExternalForm()));
+    }
 }
