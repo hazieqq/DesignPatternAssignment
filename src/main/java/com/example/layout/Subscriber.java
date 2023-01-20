@@ -4,4 +4,5 @@ import java.util.ArrayList;
 
 public interface Subscriber {
     public void updateVisible(ArrayList<String> animalVisible);
+    public void updateScore();
 }

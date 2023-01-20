@@ -6,8 +6,9 @@ public abstract class Entity {
     public String animalName;
     public String pathImage;
     public String pathImageButton;
+    public int score;
 
 
-    abstract String score();
+    // abstract int score();
 
 }

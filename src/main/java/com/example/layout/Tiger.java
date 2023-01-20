@@ -8,11 +8,8 @@ public class Tiger extends Entity {
         this.animalName = "Tiger";
         this.pathImage = App.class.getResource("images/tiger.png").toExternalForm();
         this.pathImageButton = "images/tigerButton.png";
+        this.score = 10;
     }
 
-    @Override
-    String score() {
-        // TODO Auto-generated method stub
-        return "10";
-    }
+    
 }

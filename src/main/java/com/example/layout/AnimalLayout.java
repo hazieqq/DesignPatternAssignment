@@ -14,9 +14,11 @@ public class AnimalLayout extends StackPane implements Subscriber {
 
     // private Hashtable<AnimalConstant,ImageView> animalImage;
     private HashMap<String,ImageView> animalImage;
-    
+    private HashMap<String, Integer> animalScore;
+    public int score;
     
     public AnimalLayout() {
+        score = 0;
         jungleBackground();
         animalImage(new JungleFactory());
     }
@@ -73,14 +75,18 @@ public class AnimalLayout extends StackPane implements Subscriber {
             lion.setVisible(false);
     
             animalImage = new HashMap<>();
+            animalScore = new HashMap<>();
     
             animalImage.put(animalfactory.createTiger().animalName,tiger);
             animalImage.put(animalfactory.createLion().animalName,lion);
+
+            animalScore.put(animalfactory.createLion().animalName,animalfactory.createLion().score);
+            animalScore.put(animalfactory.createTiger().animalName,animalfactory.createTiger().score);
     
             this.getChildren().addAll(animalImage.values());
 
         } catch (Exception e) {
-            LoggerTestFactory.getLogger().log("Path animal image not found");
+            LoggerTestFactory.getLogger().log("Path animal image not found sini");
             System.exit(0);
         }
        
@@ -102,17 +108,33 @@ public class AnimalLayout extends StackPane implements Subscriber {
     public void updateVisible(ArrayList<String> animalVisible) {
         for (String animal : animalImage.keySet()) {
             if (animalVisible.contains(animal)) {
+                score += animalScore.get(animal);
                 animalImage.get(animal).setVisible(true);
             } else {
+                if (score != 0 ) {
+                    score -= animalScore.get(animal);
+                } 
                 animalImage.get(animal).setVisible(false);
             }
             
         }
+        System.out.println(score + " score from updateVisible");
         
     }
 
     public HashMap<String,ImageView> getAnimalImage(){
         return animalImage;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+
+    @Override
+    public void updateScore() {
+        // TODO Auto-generated method stub
+        
     }
 
     

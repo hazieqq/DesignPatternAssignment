@@ -1,6 +1,8 @@
 package com.example.layout;
 
 
+import java.util.ArrayList;
+
 import com.example.App;
 
 import javafx.geometry.Pos;
@@ -14,7 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class changeSceneState implements State {
+public class changeSceneState implements State,Subscriber {
 
     Jungle firstscene;
 
@@ -23,6 +25,7 @@ public class changeSceneState implements State {
     Scene scene2;
     Button play;
     Button soundoff;
+    AnimalLayout sp;
 
     public changeSceneState(Jungle firstscene,Stage stage,Scene scene1,Scene scene2){
         this.firstscene = firstscene;
@@ -43,8 +46,8 @@ public class changeSceneState implements State {
 
         // Layout 1
         StackPane layout1 = new StackPane();
-        scene1 = new Scene(layout1, 700, 620);
-        layout1.getChildren().addAll(changeBackground("images/firstJungle.png"), vBox);
+        scene1 = new Scene(layout1, 1200, 800);
+        layout1.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
 
         // defines dimensions of vbox so button and label can be centered
         layout1.prefWidthProperty().bind(stage.widthProperty());
@@ -57,12 +60,15 @@ public class changeSceneState implements State {
 
         Functions function = Functions.getInstance();
         
-        AnimalLayout sp = new AnimalLayout();
+        sp = new AnimalLayout();
         
+        System.out.println(sp.getScore());
 
         AnimalButtonLayout gp = new AnimalButtonLayout();
+
         function.registerSubscriber(sp);
         function.registerSubscriber(gp);
+        function.registerSubscriber(this);
 
         bPane2.setTop(sp);
         bPane2.setCenter(gp);
@@ -86,6 +92,17 @@ public class changeSceneState implements State {
         iv.setFitHeight(stage.getWidth());
         iv.setPreserveRatio(true);
         return iv;
+    }
+
+    @Override
+    public void updateVisible(ArrayList<String> animalVisible) {
+    }
+
+    @Override
+    public void updateScore() {
+        // TODO Auto-generated method stub
+        System.out.print(sp.getScore() + " aaa");
+        
     }
 
     

@@ -8,6 +8,8 @@ public class Functions implements Publisher {
     public AnimalLayout animalImage;
     private List<Subscriber> subscriber;
     private ArrayList<String> animalVisible;
+    static int score;
+    boolean check = false;
 
     private Functions(AnimalLayout animalImage) {
         subscriber = new ArrayList<>();
@@ -56,12 +58,28 @@ public class Functions implements Publisher {
         subscriber.remove(subs);
     }
 
+    public void updateScore(){
+        subscriber.get(2).updateScore();
+        // check = true;
+        // notifySubscriber();
+    }
+
 
     @Override
     public void notifySubscriber() {
-        for (Subscriber subs : subscriber){
-            subs.updateVisible(animalVisible);
+        for (int i=0;i<subscriber.size();i++) {
+            if (check) {
+                subscriber.get(i).updateScore();
+                check = false;
+            } else {
+                subscriber.get(i).updateVisible(animalVisible);
+            }
+            
         }
+        // for (Subscriber subs : subscriber){
+        //     subs.updateVisible(animalVisible);
+        //     subs.updateScore();
+        // }
         
     }
     

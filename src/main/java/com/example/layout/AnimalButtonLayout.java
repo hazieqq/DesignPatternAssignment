@@ -27,7 +27,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         Button lion = new Button();
 
         Button checkAnswer = new Button("Check Answer");
-        // checkAnswer.setOnAction();
+        checkAnswer.setOnAction(e -> executeScore());
 
         tiger.setMaxWidth(100);
         lion.setMaxWidth(100);
@@ -40,6 +40,9 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         animalButtonsImage.put(animalfactory.createLion().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
         animalbuttons.put(animalfactory.createTiger().animalName, tiger);
         animalbuttons.put(animalfactory.createLion().animalName, lion);
+
+
+        
 
 
         for (String animal : animalbuttons.keySet()) {
@@ -55,6 +58,10 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
 
         this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName),checkAnswer);
 
+    }
+
+    private void executeScore() {
+        Functions.getInstance().updateScore();
     }
 
     private void execute(String animal) {
@@ -83,6 +90,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         for (String animal : animalbuttons.keySet()) {
             String text = "";
             if (animalVisible.contains(animal)) {
+
                 text = "Remove " + animal;
             } else {
                 text = "Add " + animal;
@@ -100,6 +108,12 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
 
     public HashMap<String, Button> getanimalbuttons(){
         return animalbuttons;
+    }
+
+    @Override
+    public void updateScore() {
+        // TODO Auto-generated method stub
+        
     }
 
     
