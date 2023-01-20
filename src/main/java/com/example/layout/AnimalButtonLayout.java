@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
-public class AnimalButtonLayout extends GridPane {
+public class AnimalButtonLayout extends GridPane implements Subscriber {
 
     private HashMap<String, Button> animalbuttons;
     private HashMap<String, animalLayer> animalButtonsImage;
@@ -40,22 +40,23 @@ public class AnimalButtonLayout extends GridPane {
 
         for (String animal : animalbuttons.keySet()) {
             Button btn = animalbuttons.get(animal);
-            // ImageView imageView = animalButtonsImage.get(animal);
-            // imageView.setFitHeight(100);
-            // imageView.setPreserveRatio(true);
-            // btn.setGraphic(imageView);
-            // btn.setContentDisplay(ContentDisplay.TOP);
-            btn.setText(animal);
-            btn.setOnAction(e -> executeCommand(new switchVisibility(animal)));
+            ImageView imageView = animalButtonsImage.get(animal);
+            imageView.setFitHeight(100);
+            imageView.setPreserveRatio(true);
+            btn.setGraphic(imageView);
+            btn.setContentDisplay(ContentDisplay.TOP);
+            animalbuttons.get(animal).setText(animal);
+            animalbuttons.get(animal).setOnAction(e -> execute(animal));
         }
 
         this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName));
 
     }
 
-    private void executeCommand(Command switchVisibility) {
-        switchVisibility.execute();
+    private void execute(String animal) {
+        Functions.getInstance().switchVisibility(animal);
     }
+
 
     private void menuBackground() {
         ColumnConstraints c = new ColumnConstraints();
@@ -66,21 +67,42 @@ public class AnimalButtonLayout extends GridPane {
         this.setVgap(10);
         this.setHgap(10);
 
-        Image image = new Image(App.class.getResource("images/menu_bg1.png").toExternalForm());
-        BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-        BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        this.setBackground(new Background(bgImage));
+        // Image image = new Image(App.class.getResource("images/menu_bg1.png").toExternalForm());
+        // BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+        // BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        // this.setBackground(new Background(bgImage));
     }
 
-    public void toggleButtonText(String text,String animal){
-        System.out.print("masuk");
-        // System.out.print(text);
-        // System.out.print(animal);
-        Button btn = animalbuttons.get(animal);
-        System.out.print(btn);
-        String btntext = text + " " + animal;
-        btn.setText("2");
+    @Override
+    public void updateVisible(ArrayList<String> animalVisible) {
+
+        for (String animal : animalbuttons.keySet()) {
+            String text = "";
+            if (animalVisible.contains(animal)) {
+                text = "Remove " + animal;
+            } else {
+                text = "Add " + animal;
+            }
+            animalbuttons.get(animal).setText(text);
+        }
+        
     }
+
+    public void updateScore(ArrayList<String> animalVisible) {
+
+        for (String animal : animalbuttons.keySet()) {
+            String text = "";
+            if (animalVisible.contains(animal)) {
+                text = "Remove " + animal;
+            } else {
+                text = "Add " + animal;
+            }
+            animalbuttons.get(animal).setText(text);
+        }
+        
+    }
+
+  
 
     // private void button() {
     //     undobutton = new Button("Undo");

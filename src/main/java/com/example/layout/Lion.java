@@ -2,7 +2,7 @@ package com.example.layout;
 
 import com.example.App;
 
-public class Lion extends Animal {
+public class Lion extends Entity {
 
     public Lion() {
         this.animalName = "Lion";

@@ -1,31 +1,68 @@
 package com.example.layout;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Functions extends AnimalButtonLayout {
+public class Functions implements Publisher {
     private static Functions uniqueInstance;
     public AnimalLayout animalImage;
-    public AnimalButtonLayout animalButton;
-    private static boolean check = false;
+    private List<Subscriber> subscriber;
+    private ArrayList<String> animalVisible;
 
     private Functions(AnimalLayout animalImage) {
+        subscriber = new ArrayList<>();
+        animalVisible = new ArrayList<>();
         this.animalImage = animalImage;
     }
 
-    private Functions(AnimalButtonLayout animalButton) {
-        this.animalButton = animalButton;
+    private Functions() {
+        subscriber = new ArrayList<>();
+        animalVisible = new ArrayList<>();
     }
+
 
     public static Functions getInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new Functions(new AnimalLayout());
+            // uniqueInstance = new Functions(new AnimalLayout());
+            uniqueInstance = new Functions();
         }
         return uniqueInstance;
     }
 
     public void switchVisibility(String animal) {
         // System.out.print(animal);
-        String text = animalImage.toggleVisibility(animal);
-        this.toggleButtonText(text, animal);
+        if (animalVisible.contains(animal)) {
+            animalVisible.remove(animal);
+        } else {
+            animalVisible.add(animal);
+        }
+        // animalImage.toggleVisibility(animal);
+        // System.out.println(text);
+        // System.out.println(animal);
+        // textAndAnimal.put(animal, text);
+        notifySubscriber();
+    }
+
+
+    @Override
+    public void registerSubscriber(Subscriber subs) {
+        subscriber.add(subs);
+    }
+
+
+    @Override
+    public void removeSubscriber(Subscriber subs) {
+        // just remove , nothing mucch !
+        subscriber.remove(subs);
+    }
+
+
+    @Override
+    public void notifySubscriber() {
+        for (Subscriber subs : subscriber){
+            subs.updateVisible(animalVisible);
+        }
+        
     }
     
 

@@ -1,5 +1,6 @@
 package com.example.layout;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import com.example.App;
@@ -8,7 +9,7 @@ import com.example.Log.LoggerTestFactory;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
-public class AnimalLayout extends StackPane {
+public class AnimalLayout extends StackPane implements Subscriber {
 
     // private Hashtable<AnimalConstant,ImageView> animalImage;
     private Hashtable<String,ImageView> animalImage;
@@ -94,5 +95,21 @@ public class AnimalLayout extends StackPane {
             return "Remove";
         }
     }
+
+
+    @Override
+    public void updateVisible(ArrayList<String> animalVisible) {
+        for (String animal : animalImage.keySet()) {
+            if (animalVisible.contains(animal)) {
+                animalImage.get(animal).setVisible(true);
+            } else {
+                animalImage.get(animal).setVisible(false);
+            }
+            
+        }
+        
+    }
+
+    
 }
 

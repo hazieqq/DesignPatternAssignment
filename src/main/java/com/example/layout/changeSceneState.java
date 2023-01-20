@@ -1,5 +1,6 @@
 package com.example.layout;
 
+
 import com.example.App;
 
 import javafx.geometry.Pos;
@@ -33,7 +34,8 @@ public class changeSceneState implements State {
     @Override
     public void changeScene() {
 
-        play = new Button("PLAY GAME");
+        play = new Button("PLay Game Jungle");
+        // soundoff = new Button("PLay Game Jungle");
         soundoff = new Button("SOUND OFF");
         VBox vBox = new VBox(20);
         vBox.getChildren().addAll(play,soundoff);
@@ -51,18 +53,24 @@ public class changeSceneState implements State {
         play.setOnAction(event -> stage.setScene(scene2));
 
         // Layout 2
-        BorderPane bPane = new BorderPane();
+        BorderPane bPane2 = new BorderPane();
 
         Functions function = Functions.getInstance();
         
-        // AnimalLayout sp = new AnimalLayout();
+        AnimalLayout sp = new AnimalLayout();
 
         AnimalButtonLayout gp = new AnimalButtonLayout();
+        function.registerSubscriber(sp);
+        function.registerSubscriber(gp);
 
-        bPane.setTop(function.animalImage);
-        bPane.setCenter(gp);
+        bPane2.setTop(sp);
+        bPane2.setCenter(gp);
 
-        scene2 = new Scene(bPane, 700, 800);
+
+        //layout 3
+        
+
+        scene2 = new Scene(bPane2, 700, 800);
 
         stage.setScene(scene1);
         stage.setTitle("Scramblo");

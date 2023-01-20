@@ -3,12 +3,12 @@ package com.example.layout;
 public class JungleFactory implements AnimalFactory {
 
     @Override
-    public Animal createTiger() {
+    public Entity createTiger() {
         return new Tiger();
     }
 
     @Override
-    public Animal createLion() {
+    public Entity createLion() {
         return new Lion();
     }
     
