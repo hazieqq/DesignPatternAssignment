@@ -52,10 +52,14 @@ public class changeSceneState implements State {
 
         // Layout 2
         BorderPane bPane = new BorderPane();
-        AnimalLayout sp = new AnimalLayout();
+
+        Functions function = Functions.getInstance();
+        
+        // AnimalLayout sp = new AnimalLayout();
+
         AnimalButtonLayout gp = new AnimalButtonLayout();
 
-        bPane.setTop(sp);
+        bPane.setTop(function.animalImage);
         bPane.setCenter(gp);
 
         scene2 = new Scene(bPane, 700, 800);

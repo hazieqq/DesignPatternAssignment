@@ -13,6 +13,7 @@ public class AnimalButtonLayout extends GridPane {
 
     private HashMap<String, Button> animalbuttons;
     private HashMap<String, animalLayer> animalButtonsImage;
+    public AnimalLayout animallayout;
     // Button undobutton;
     // private Button soundBtn;
     
@@ -39,18 +40,21 @@ public class AnimalButtonLayout extends GridPane {
 
         for (String animal : animalbuttons.keySet()) {
             Button btn = animalbuttons.get(animal);
-            ImageView imageView = animalButtonsImage.get(animal);
-            imageView.setFitHeight(100);
-            imageView.setPreserveRatio(true);
-            btn.setGraphic(imageView);
-            btn.setContentDisplay(ContentDisplay.TOP);
+            // ImageView imageView = animalButtonsImage.get(animal);
+            // imageView.setFitHeight(100);
+            // imageView.setPreserveRatio(true);
+            // btn.setGraphic(imageView);
+            // btn.setContentDisplay(ContentDisplay.TOP);
             btn.setText(animal);
-            // decoBtn.setOnAction(e -> executeCommand(new
-            // ToggleDecoVisibility(decoration)));
+            btn.setOnAction(e -> executeCommand(new switchVisibility(animal)));
         }
 
         this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName));
 
+    }
+
+    private void executeCommand(Command switchVisibility) {
+        switchVisibility.execute();
     }
 
     private void menuBackground() {
@@ -66,6 +70,16 @@ public class AnimalButtonLayout extends GridPane {
         BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
         BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(bgImage));
+    }
+
+    public void toggleButtonText(String text,String animal){
+        System.out.print("masuk");
+        // System.out.print(text);
+        // System.out.print(animal);
+        Button btn = animalbuttons.get(animal);
+        System.out.print(btn);
+        String btntext = text + " " + animal;
+        btn.setText("2");
     }
 
     // private void button() {

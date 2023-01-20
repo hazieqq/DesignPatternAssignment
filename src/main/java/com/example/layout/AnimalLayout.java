@@ -67,8 +67,8 @@ public class AnimalLayout extends StackPane {
             ImageView tiger = new ImageView(new Image(animalfactory.createTiger().pathImage));
             ImageView lion = new ImageView(new Image(animalfactory.createLion().pathImage));
     
-            tiger.setVisible(true);
-            lion.setVisible(true);
+            tiger.setVisible(false);
+            lion.setVisible(false);
     
             animalImage = new Hashtable<>();
     
@@ -82,6 +82,17 @@ public class AnimalLayout extends StackPane {
             System.exit(0);
         }
        
+    }
+
+    public String toggleVisibility(String animal){
+        // System.out.println(animal);
+        if (animalImage.get(animal).isVisible()) {
+            animalImage.get(animal).setVisible(false);
+            return "Add";
+        } else {
+            animalImage.get(animal).setVisible(true);
+            return "Remove";
+        }
     }
 }
 
