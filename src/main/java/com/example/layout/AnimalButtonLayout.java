@@ -12,7 +12,7 @@ import javafx.scene.layout.*;
 public class AnimalButtonLayout extends GridPane implements Subscriber {
 
     private HashMap<String, Button> animalbuttons;
-    private HashMap<String, animalLayer> animalButtonsImage;
+    private HashMap<String, animalLayerAdapter> animalButtonsImage;
     public AnimalLayout animallayout;
     // Button undobutton;
     // private Button soundBtn;
@@ -26,14 +26,18 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         Button tiger = new Button();
         Button lion = new Button();
 
+        Button checkAnswer = new Button("Check Answer");
+        // checkAnswer.setOnAction();
+
         tiger.setMaxWidth(100);
         lion.setMaxWidth(100);
 
         animalButtonsImage = new HashMap<>();
         animalbuttons = new HashMap<>();
 
-        animalButtonsImage.put(animalfactory.createTiger().animalName, new animalLayer(animalfactory.createTiger().pathImageButton));
-        animalButtonsImage.put(animalfactory.createLion().animalName, new animalLayer(animalfactory.createLion().pathImageButton));
+
+        animalButtonsImage.put(animalfactory.createTiger().animalName, new animalLayerAdapter(animalfactory.createTiger().pathImageButton));
+        animalButtonsImage.put(animalfactory.createLion().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
         animalbuttons.put(animalfactory.createTiger().animalName, tiger);
         animalbuttons.put(animalfactory.createLion().animalName, lion);
 
@@ -49,7 +53,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
             animalbuttons.get(animal).setOnAction(e -> execute(animal));
         }
 
-        this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName));
+        this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName),checkAnswer);
 
     }
 
@@ -88,21 +92,17 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         
     }
 
-    public void updateScore(ArrayList<String> animalVisible) {
+    // public void updateScore(ArrayList<String> animalVisible) {
 
-        for (String animal : animalbuttons.keySet()) {
-            String text = "";
-            if (animalVisible.contains(animal)) {
-                text = "Remove " + animal;
-            } else {
-                text = "Add " + animal;
-            }
-            animalbuttons.get(animal).setText(text);
-        }
+
         
+    // }
+
+    public HashMap<String, Button> getanimalbuttons(){
+        return animalbuttons;
     }
 
-  
+    
 
     // private void button() {
     //     undobutton = new Button("Undo");

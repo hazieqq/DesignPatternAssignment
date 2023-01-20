@@ -13,6 +13,6 @@ public class Tiger extends Entity {
     @Override
     String score() {
         // TODO Auto-generated method stub
-        return "1";
+        return "10";
     }
 }

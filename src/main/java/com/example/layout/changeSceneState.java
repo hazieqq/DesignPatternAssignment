@@ -58,6 +58,7 @@ public class changeSceneState implements State {
         Functions function = Functions.getInstance();
         
         AnimalLayout sp = new AnimalLayout();
+        
 
         AnimalButtonLayout gp = new AnimalButtonLayout();
         function.registerSubscriber(sp);
@@ -68,8 +69,6 @@ public class changeSceneState implements State {
 
 
         //layout 3
-        
-
         scene2 = new Scene(bPane2, 700, 800);
 
         stage.setScene(scene1);

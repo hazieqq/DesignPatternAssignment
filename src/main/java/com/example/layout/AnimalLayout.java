@@ -1,6 +1,7 @@
 package com.example.layout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import com.example.App;
@@ -12,7 +13,7 @@ import javafx.scene.layout.*;
 public class AnimalLayout extends StackPane implements Subscriber {
 
     // private Hashtable<AnimalConstant,ImageView> animalImage;
-    private Hashtable<String,ImageView> animalImage;
+    private HashMap<String,ImageView> animalImage;
     
     
     public AnimalLayout() {
@@ -71,7 +72,7 @@ public class AnimalLayout extends StackPane implements Subscriber {
             tiger.setVisible(false);
             lion.setVisible(false);
     
-            animalImage = new Hashtable<>();
+            animalImage = new HashMap<>();
     
             animalImage.put(animalfactory.createTiger().animalName,tiger);
             animalImage.put(animalfactory.createLion().animalName,lion);
@@ -85,16 +86,16 @@ public class AnimalLayout extends StackPane implements Subscriber {
        
     }
 
-    public String toggleVisibility(String animal){
-        // System.out.println(animal);
-        if (animalImage.get(animal).isVisible()) {
-            animalImage.get(animal).setVisible(false);
-            return "Add";
-        } else {
-            animalImage.get(animal).setVisible(true);
-            return "Remove";
-        }
-    }
+    // public String toggleVisibility(String animal){
+    //     // System.out.println(animal);
+    //     if (animalImage.get(animal).isVisible()) {
+    //         animalImage.get(animal).setVisible(false);
+    //         return "Add";
+    //     } else {
+    //         animalImage.get(animal).setVisible(true);
+    //         return "Remove";
+    //     }
+    // }
 
 
     @Override
@@ -108,6 +109,10 @@ public class AnimalLayout extends StackPane implements Subscriber {
             
         }
         
+    }
+
+    public HashMap<String,ImageView> getAnimalImage(){
+        return animalImage;
     }
 
     
