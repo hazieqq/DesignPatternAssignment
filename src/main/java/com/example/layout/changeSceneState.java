@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.example.App;
 
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class changeSceneState implements State,Subscriber {
@@ -21,11 +23,10 @@ public class changeSceneState implements State,Subscriber {
     Jungle firstscene;
 
     Stage stage;
-    Scene scene1;
-    Scene scene2;
-    Button play;
-    Button soundoff;
+    Scene scene1,scene2,scene3;
+    Button play,playAgain,soundoff,home;
     AnimalLayout sp;
+    AnimalButtonLayout gp;
 
     public changeSceneState(Jungle firstscene,Stage stage,Scene scene1,Scene scene2){
         this.firstscene = firstscene;
@@ -37,24 +38,6 @@ public class changeSceneState implements State,Subscriber {
     @Override
     public void changeScene() {
 
-        play = new Button("PLay Game Jungle");
-        // soundoff = new Button("PLay Game Jungle");
-        soundoff = new Button("SOUND OFF");
-        VBox vBox = new VBox(20);
-        vBox.getChildren().addAll(play,soundoff);
-        vBox.setAlignment(Pos.CENTER);
-
-        // Layout 1
-        StackPane layout1 = new StackPane();
-        scene1 = new Scene(layout1, 1200, 800);
-        layout1.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
-
-        // defines dimensions of vbox so button and label can be centered
-        layout1.prefWidthProperty().bind(stage.widthProperty());
-        layout1.prefHeightProperty().bind(stage.heightProperty());
-
-        play.setOnAction(event -> stage.setScene(scene2));
-
         // Layout 2
         BorderPane bPane2 = new BorderPane();
 
@@ -62,9 +45,7 @@ public class changeSceneState implements State,Subscriber {
         
         sp = new AnimalLayout();
         
-        System.out.println(sp.getScore());
-
-        AnimalButtonLayout gp = new AnimalButtonLayout();
+        gp = new AnimalButtonLayout();
 
         function.registerSubscriber(sp);
         function.registerSubscriber(gp);
@@ -74,13 +55,9 @@ public class changeSceneState implements State,Subscriber {
         bPane2.setCenter(gp);
 
 
-        //layout 3
-        scene2 = new Scene(bPane2, 700, 800);
-
-        stage.setScene(scene1);
-        stage.setTitle("Scramblo");
-        stage.setResizable(false);
-        stage.show();
+        scene2 = new Scene(bPane2, 1200, 1000);
+        stage.setScene(scene2);
+        
         
     }
 
@@ -100,8 +77,40 @@ public class changeSceneState implements State,Subscriber {
 
     @Override
     public void updateScore() {
-        // TODO Auto-generated method stub
-        System.out.print(sp.getScore() + " aaa");
+
+        System.out.println("Score : "+sp.getScore());
+        
+
+        playAgain = new Button("Play Again");
+        home = new Button("Home");
+        VBox vBox = new VBox(20);
+        vBox.getChildren().addAll(playAgain,home);
+        vBox.setAlignment(Pos.CENTER);
+
+        // Layout 3
+        StackPane layout3 = new StackPane();
+        scene3 = new Scene(layout3, 1200, 800);  
+        layout3.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
+
+        // defines dimensions of vbox so button and label can be centered
+        layout3.prefWidthProperty().bind(stage.widthProperty());
+        layout3.prefHeightProperty().bind(stage.heightProperty());
+
+        playAgain.setOnAction(event -> stage.setScene(scene2));
+
+        home.setOnAction(event -> stage.setScene(scene1));
+
+                
+        //Creating a scene object 
+        
+        //Setting title to the Stage 
+        stage.setTitle("Sample Application"); 
+            
+        //Adding scene to the stage 
+        stage.setScene(scene3); 
+            
+        //Displaying the contents of the stage 
+        // stage.show(); 
         
     }
 

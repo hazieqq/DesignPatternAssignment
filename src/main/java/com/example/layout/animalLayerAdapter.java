@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class animalLayerAdapter extends ImageView {
 
-    // public animalLayer(String pathToImage, boolean visibility) {
-    //     super(new Image(App.class.getResource(pathToImage).toExternalForm()));
-    //     this.setVisible(visibility);
-    // }
+    public animalLayerAdapter(String pathToImage, boolean visible) {
+        super(new Image(App.class.getResource(pathToImage).toExternalForm()));
+        this.setVisible(visible);
+    }
 
     public animalLayerAdapter(String pathToImage) {
         super(new Image(App.class.getResource(pathToImage).toExternalForm()));

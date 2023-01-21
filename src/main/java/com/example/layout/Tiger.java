@@ -1,14 +1,14 @@
 package com.example.layout;
 
-import com.example.App;
 
 public class Tiger extends Entity {
     
-    public Tiger(){
+    public Tiger(String environment){
         this.animalName = "Tiger";
-        this.pathImage = App.class.getResource("images/tiger.png").toExternalForm();
+        this.pathImage = "images/tiger.png";
         this.pathImageButton = "images/tigerButton.png";
-        this.score = 10;
+        this.score = "10";
+        this.environment = environment;
     }
 
     

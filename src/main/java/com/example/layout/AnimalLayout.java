@@ -1,5 +1,6 @@
 package com.example.layout;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -13,8 +14,8 @@ import javafx.scene.layout.*;
 public class AnimalLayout extends StackPane implements Subscriber {
 
     // private Hashtable<AnimalConstant,ImageView> animalImage;
-    private HashMap<String,ImageView> animalImage;
-    private HashMap<String, Integer> animalScore;
+    private HashMap<String,animalLayerAdapter> animalImage;
+    private HashMap<String, String[]> animalScore;
     public int score;
     
     public AnimalLayout() {
@@ -27,7 +28,7 @@ public class AnimalLayout extends StackPane implements Subscriber {
     private void jungleBackground() {
         try{
             LoggerTestFactory.getLogger().log("Initialize jungle background");
-            Image image = new Image(App.class.getResource("images/jungle2.png").toExternalForm());
+            Image image = new Image(App.class.getResource("images/jungleBackground.png").toExternalForm());
             BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             this.setBackground(new Background(bgImage));
         } catch (Exception e) {
@@ -37,51 +38,46 @@ public class AnimalLayout extends StackPane implements Subscriber {
         
     }
 
-    // private void animalImage() {
-    //     LoggerTestFactory.getLogger().log("Initialize animal image");
-
-    //     ImageView tiger = new ImageView(new Image(App.class.getResource("images/tiger.png").toExternalForm()));
-    //     ImageView lion = new ImageView(new Image(App.class.getResource("images/lion.png").toExternalForm()));
-    //     ImageView monkey = new ImageView(new Image(App.class.getResource("images/monkey.png").toExternalForm()));
-    //     ImageView bird = new ImageView(new Image(App.class.getResource("images/bird.png").toExternalForm()));
-    //     ImageView giraffe = new ImageView(new Image(App.class.getResource("images/giraffe.png").toExternalForm()));
-    //     ImageView panda = new ImageView(new Image(App.class.getResource("images/panda.png").toExternalForm()));
-
-    //     tiger.setVisible(false);
-    //     lion.setVisible(false);
-    //     monkey.setVisible(false);
-    //     bird.setVisible(false);
-    //     giraffe.setVisible(false);
-    //     panda.setVisible(false);
-        
-    //     animalImage = new Hashtable<>();
-
-    //     animalImage.put(AnimalConstant.tiger,tiger);
-    //     animalImage.put(AnimalConstant.lion,lion);
-    //     animalImage.put(AnimalConstant.monkey,monkey);
-    //     animalImage.put(AnimalConstant.bird,bird);
-    //     animalImage.put(AnimalConstant.giraffe,giraffe);
-    //     animalImage.put(AnimalConstant.panda,panda);
-       
-    //     this.getChildren().addAll(animalImage.values());
-    // }
-
     public void animalImage(AnimalFactory animalfactory) {
         try {
-            ImageView tiger = new ImageView(new Image(animalfactory.createTiger().pathImage));
-            ImageView lion = new ImageView(new Image(animalfactory.createLion().pathImage));
-    
-            tiger.setVisible(false);
-            lion.setVisible(false);
-    
             animalImage = new HashMap<>();
             animalScore = new HashMap<>();
-    
-            animalImage.put(animalfactory.createTiger().animalName,tiger);
-            animalImage.put(animalfactory.createLion().animalName,lion);
 
-            animalScore.put(animalfactory.createLion().animalName,animalfactory.createLion().score);
-            animalScore.put(animalfactory.createTiger().animalName,animalfactory.createTiger().score);
+    
+            animalImage.put(animalfactory.createTiger().animalName,new animalLayerAdapter(animalfactory.createTiger().pathImage,false));
+            animalImage.put(animalfactory.createLion().animalName,new animalLayerAdapter(animalfactory.createLion().pathImage,false));
+            animalImage.put(animalfactory.createDeer().animalName,new animalLayerAdapter(animalfactory.createDeer().pathImage,false));
+            animalImage.put(animalfactory.createDoll().animalName,new animalLayerAdapter(animalfactory.createDoll().pathImage,false));
+            animalImage.put(animalfactory.createGorilla().animalName,new animalLayerAdapter(animalfactory.createGorilla().pathImage,false));
+            animalImage.put(animalfactory.createLight().animalName,new animalLayerAdapter(animalfactory.createLight().pathImage,false));
+            animalImage.put(animalfactory.createMonitor().animalName,new animalLayerAdapter(animalfactory.createMonitor().pathImage,false));
+            animalImage.put(animalfactory.createParrot().animalName,new animalLayerAdapter(animalfactory.createParrot().pathImage,false));
+            animalImage.put(animalfactory.createRafflesia().animalName,new animalLayerAdapter(animalfactory.createRafflesia().pathImage,false));
+            animalImage.put(animalfactory.createTrash().animalName,new animalLayerAdapter(animalfactory.createTrash().pathImage,false));
+            animalImage.put(animalfactory.createWhale().animalName,new animalLayerAdapter(animalfactory.createWhale().pathImage,false));
+
+
+            animalScore.put(animalfactory.createTiger().animalName,new String[]{animalfactory.createTiger().environment,animalfactory.createTiger().score});
+            animalScore.put(animalfactory.createLion().animalName,new String[]{animalfactory.createLion().environment,animalfactory.createLion().score});
+            animalScore.put(animalfactory.createDeer().animalName,new String[]{animalfactory.createDeer().environment,animalfactory.createDeer().score});
+            animalScore.put(animalfactory.createDoll().animalName,new String[]{animalfactory.createDoll().environment,animalfactory.createDoll().score});
+            animalScore.put(animalfactory.createGorilla().animalName,new String[]{animalfactory.createGorilla().environment,animalfactory.createGorilla().score});
+            animalScore.put(animalfactory.createLight().animalName,new String[]{animalfactory.createLight().environment,animalfactory.createLight().score});
+            animalScore.put(animalfactory.createMonitor().animalName,new String[]{animalfactory.createMonitor().environment,animalfactory.createMonitor().score});
+            animalScore.put(animalfactory.createParrot().animalName,new String[]{animalfactory.createParrot().environment,animalfactory.createParrot().score});
+            animalScore.put(animalfactory.createRafflesia().animalName,new String[]{animalfactory.createRafflesia().environment,animalfactory.createRafflesia().score});
+            animalScore.put(animalfactory.createTrash().animalName,new String[]{animalfactory.createTrash().environment,animalfactory.createTrash().score});
+            animalScore.put(animalfactory.createWhale().animalName,new String[]{animalfactory.createWhale().environment,animalfactory.createWhale().score});
+            // animalScore.put(animalfactory.createTiger().animalName,animalfactory.createTiger().score);
+            // animalScore.put(animalfactory.createDeer().animalName,animalfactory.createDeer().score);
+            // animalScore.put(animalfactory.createDoll().animalName,animalfactory.createDoll().score);
+            // animalScore.put(animalfactory.createGorilla().animalName,animalfactory.createGorilla().score);
+            // animalScore.put(animalfactory.createLight().animalName,animalfactory.createLight().score);
+            // animalScore.put(animalfactory.createMonitor().animalName,animalfactory.createMonitor().score);
+            // animalScore.put(animalfactory.createParrot().animalName,animalfactory.createParrot().score);
+            // animalScore.put(animalfactory.createRafflesia().animalName,animalfactory.createRafflesia().score);
+            // animalScore.put(animalfactory.createTrash().animalName,animalfactory.createTrash().score);
+            // animalScore.put(animalfactory.createWhale().animalName,animalfactory.createWhale().score);
     
             this.getChildren().addAll(animalImage.values());
 
@@ -92,37 +88,27 @@ public class AnimalLayout extends StackPane implements Subscriber {
        
     }
 
-    // public String toggleVisibility(String animal){
-    //     // System.out.println(animal);
-    //     if (animalImage.get(animal).isVisible()) {
-    //         animalImage.get(animal).setVisible(false);
-    //         return "Add";
-    //     } else {
-    //         animalImage.get(animal).setVisible(true);
-    //         return "Remove";
-    //     }
-    // }
-
 
     @Override
     public void updateVisible(ArrayList<String> animalVisible) {
         for (String animal : animalImage.keySet()) {
             if (animalVisible.contains(animal)) {
-                score += animalScore.get(animal);
+                if (!animalImage.get(animal).isVisible()) {
+                    score += Integer.parseInt(animalScore.get(animal)[1]);
+                }
+                System.out.println(animal);
                 animalImage.get(animal).setVisible(true);
             } else {
-                if (score != 0 ) {
-                    score -= animalScore.get(animal);
+                if (score != 0 && animalImage.get(animal).isVisible()) {
+                    score -= Integer.parseInt(animalScore.get(animal)[1]);
                 } 
                 animalImage.get(animal).setVisible(false);
             }
             
         }
-        System.out.println(score + " score from updateVisible");
-        
     }
 
-    public HashMap<String,ImageView> getAnimalImage(){
+    public HashMap<String,animalLayerAdapter> getAnimalImage(){
         return animalImage;
     }
 

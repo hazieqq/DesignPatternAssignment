@@ -11,7 +11,7 @@ import javafx.scene.layout.*;
 
 public class AnimalButtonLayout extends GridPane implements Subscriber {
 
-    private HashMap<String, Button> animalbuttons;
+    private HashMap<String, buttonLayerAdapter> animalbuttons;
     private HashMap<String, animalLayerAdapter> animalButtonsImage;
     public AnimalLayout animallayout;
     // Button undobutton;
@@ -23,14 +23,10 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
     }
 
     private void button(AnimalFactory animalfactory) {
-        Button tiger = new Button();
-        Button lion = new Button();
+
 
         Button checkAnswer = new Button("Check Answer");
         checkAnswer.setOnAction(e -> executeScore());
-
-        tiger.setMaxWidth(100);
-        lion.setMaxWidth(100);
 
         animalButtonsImage = new HashMap<>();
         animalbuttons = new HashMap<>();
@@ -38,11 +34,28 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
 
         animalButtonsImage.put(animalfactory.createTiger().animalName, new animalLayerAdapter(animalfactory.createTiger().pathImageButton));
         animalButtonsImage.put(animalfactory.createLion().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalbuttons.put(animalfactory.createTiger().animalName, tiger);
-        animalbuttons.put(animalfactory.createLion().animalName, lion);
+        animalButtonsImage.put(animalfactory.createDeer().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createDoll().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createGorilla().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createLight().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createMonitor().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createParrot().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createRafflesia().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createTrash().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
+        animalButtonsImage.put(animalfactory.createWhale().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
 
+        animalbuttons.put(animalfactory.createTiger().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createLion().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createDeer().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createDoll().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createGorilla().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createLight().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createMonitor().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createParrot().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createRafflesia().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createTrash().animalName, new buttonLayerAdapter());
+        animalbuttons.put(animalfactory.createWhale().animalName, new buttonLayerAdapter());
 
-        
 
 
         for (String animal : animalbuttons.keySet()) {
@@ -56,7 +69,11 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
             animalbuttons.get(animal).setOnAction(e -> execute(animal));
         }
 
-        this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName),checkAnswer);
+        this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName),animalbuttons.get(animalfactory.createDeer().animalName),
+        animalbuttons.get(animalfactory.createDoll().animalName),animalbuttons.get(animalfactory.createGorilla().animalName),animalbuttons.get(animalfactory.createLight().animalName),
+        animalbuttons.get(animalfactory.createMonitor().animalName));
+        this.addRow(1, animalbuttons.get(animalfactory.createParrot().animalName),animalbuttons.get(animalfactory.createRafflesia().animalName),animalbuttons.get(animalfactory.createTrash().animalName),
+        animalbuttons.get(animalfactory.createWhale().animalName),checkAnswer);
 
     }
 
@@ -72,9 +89,9 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
     private void menuBackground() {
         ColumnConstraints c = new ColumnConstraints();
         c.setHgrow(Priority.ALWAYS);
-        this.getColumnConstraints().addAll(c, c, c, c);
-        this.setPadding(new Insets(20));
-        this.setAlignment(Pos.CENTER);
+        // this.getColumnConstraints().addAll(c, c, c, c);
+        this.setPadding(new Insets(5,10,5,10));
+        // this.setAlignment(Pos.BASELINE_CENTER);
         this.setVgap(10);
         this.setHgap(10);
 
@@ -90,7 +107,6 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         for (String animal : animalbuttons.keySet()) {
             String text = "";
             if (animalVisible.contains(animal)) {
-
                 text = "Remove " + animal;
             } else {
                 text = "Add " + animal;
@@ -100,77 +116,14 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         
     }
 
-    // public void updateScore(ArrayList<String> animalVisible) {
 
-
-        
-    // }
-
-    public HashMap<String, Button> getanimalbuttons(){
+    public HashMap<String, buttonLayerAdapter> getanimalbuttons(){
         return animalbuttons;
     }
 
     @Override
     public void updateScore() {
-        // TODO Auto-generated method stub
-        
     }
-
-    
-
-    // private void button() {
-    //     undobutton = new Button("Undo");
-
-    //     Button tiger = new Button();
-    //     Button lion = new Button();
-    //     Button monkey = new Button();
-    //     Button bird = new Button();
-    //     Button giraffe = new Button();
-    //     Button panda = new Button();
-
-    //     tiger.setMaxWidth(100);
-    //     lion.setMaxWidth(100);
-    //     monkey.setMaxWidth(100);
-    //     bird.setMaxWidth(100);
-    //     giraffe.setMaxWidth(100);
-    //     panda.setMaxWidth(100);
-
-    //     // undoBtn.setOnAction(e -> undoCommand());
-    //     // soundBtn = new MenuButton("Pause Music");
-    //     // soundBtn.setOnAction(e -> executeCommand(new ToggleSound()));
-
-    //     animalButtonsImage = new HashMap<>();
-    //     animalButtonsImage.put(AnimalConstant.tiger, new animalLayer("images/tigerButton.png"));
-    //     animalButtonsImage.put(AnimalConstant.lion, new animalLayer("images/tigerButton.png"));
-    //     animalButtonsImage.put(AnimalConstant.monkey, new animalLayer("images/tigerButton.png"));
-    //     animalButtonsImage.put(AnimalConstant.bird, new animalLayer("images/tigerButton.png"));
-    //     animalButtonsImage.put(AnimalConstant.giraffe, new animalLayer("images/tigerButton.png"));
-    //     animalButtonsImage.put(AnimalConstant.panda, new animalLayer("images/tigerButton.png"));
-
-    //     animalbuttons = new HashMap<>();
-    //     animalbuttons.put(AnimalConstant.tiger, tiger);
-    //     animalbuttons.put(AnimalConstant.lion, lion);
-    //     animalbuttons.put(AnimalConstant.monkey, monkey);
-    //     animalbuttons.put(AnimalConstant.bird, bird);
-    //     animalbuttons.put(AnimalConstant.giraffe, giraffe);
-    //     animalbuttons.put(AnimalConstant.panda, panda);
-
-    //     for (AnimalConstant animal : animalbuttons.keySet()) {
-    //         Button btn = animalbuttons.get(animal);
-    //         ImageView imageView = animalButtonsImage.get(animal);
-    //         imageView.setFitHeight(100);
-    //         imageView.setPreserveRatio(true);
-    //         btn.setGraphic(imageView);
-    //         btn.setContentDisplay(ContentDisplay.TOP);
-    //         btn.setText(animal.name());
-    //         // decoBtn.setOnAction(e -> executeCommand(new
-    //         // ToggleDecoVisibility(decoration)));
-    //     }
-
-    //     this.addRow(0, animalbuttons.get(AnimalConstant.tiger), animalbuttons.get(AnimalConstant.lion), animalbuttons.get(AnimalConstant.monkey));
-    //     this.addRow(1, animalbuttons.get(AnimalConstant.bird), animalbuttons.get(AnimalConstant.giraffe), animalbuttons.get(AnimalConstant.panda));
-    //     this.addRow(2, undobutton);
-    // }
 
     
 }
