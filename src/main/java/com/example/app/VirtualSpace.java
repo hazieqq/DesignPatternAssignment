@@ -48,6 +48,7 @@ public class VirtualSpace  {
 
         Button play = new Button("PLAY GAME");
         sound = new Button("SOUND OFF");
+        
         VBox vBox = new VBox(20);
         vBox.getChildren().addAll(play,sound);
         vBox.setAlignment(Pos.CENTER);

@@ -39,8 +39,9 @@ public class changeSceneState implements State,Subscriber {
 
         Button jungleGame = new Button("Jungle");
         Button amazonGame = new Button("Amazon Jungle");
+        Button back = new Button("Back");
         VBox vBox = new VBox(20);
-        vBox.getChildren().addAll(jungleGame,amazonGame);
+        vBox.getChildren().addAll(jungleGame,amazonGame,back);
         vBox.setAlignment(Pos.CENTER);
 
         // Layout 1
@@ -55,6 +56,7 @@ public class changeSceneState implements State,Subscriber {
 
         jungleGame.setOnAction(e->scene3());
         amazonGame.setOnAction(e->scene4());
+        back.setOnAction(e->stage.setScene(scene1));
 
 
         stage.setScene(scene2);
