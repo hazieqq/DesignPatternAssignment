@@ -12,14 +12,22 @@ import javafx.scene.layout.*;
 public class AnimalButtonLayout extends GridPane implements Subscriber {
 
     private HashMap<String, buttonLayerAdapter> animalbuttons;
+    private HashMap<String, buttonLayerAdapter> anomaliesAnimalbuttons;
     private HashMap<String, animalLayerAdapter> animalButtonsImage;
+    private HashMap<String, animalLayerAdapter> anomaliesAnimalButtonImage;
     public AnimalLayout animallayout;
     // Button undobutton;
     // private Button soundBtn;
     
-    public AnimalButtonLayout() {
-        menuBackground();
-        button(new JungleFactory());
+    public AnimalButtonLayout(String scene) {
+        if (scene == "scene3") {
+            menuBackground();
+            button(new JungleFactory());
+        } else {
+            menuBackground();
+            button(new AmazonFactory());
+        }
+        
     }
 
     private void button(AnimalFactory animalfactory) {
@@ -29,33 +37,20 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         checkAnswer.setOnAction(e -> executeScore());
 
         animalButtonsImage = new HashMap<>();
+        anomaliesAnimalButtonImage = new HashMap<>();
         animalbuttons = new HashMap<>();
+        anomaliesAnimalbuttons = new HashMap<>();
 
+        for (int i = 0; i < animalfactory.createAnimals().length; i++) {
+            animalButtonsImage.put(animalfactory.createAnimals()[i].animalName,new animalLayerAdapter(animalfactory.createAnimals()[i].pathImageButton));
+            animalbuttons.put(animalfactory.createAnimals()[i].animalName,new buttonLayerAdapter());
+            // System.out.println(animalfactory.createAnimals()[i].animalName);
+        }
 
-        animalButtonsImage.put(animalfactory.createTiger().animalName, new animalLayerAdapter(animalfactory.createTiger().pathImageButton));
-        animalButtonsImage.put(animalfactory.createLion().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createDeer().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createDoll().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createGorilla().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createLight().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createMonitor().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createParrot().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createRafflesia().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createTrash().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-        animalButtonsImage.put(animalfactory.createWhale().animalName, new animalLayerAdapter(animalfactory.createLion().pathImageButton));
-
-        animalbuttons.put(animalfactory.createTiger().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createLion().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createDeer().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createDoll().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createGorilla().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createLight().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createMonitor().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createParrot().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createRafflesia().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createTrash().animalName, new buttonLayerAdapter());
-        animalbuttons.put(animalfactory.createWhale().animalName, new buttonLayerAdapter());
-
+        for (int i = 0; i < animalfactory.createAnomalies().length; i++) {
+            anomaliesAnimalButtonImage.put(animalfactory.createAnomalies()[i].animalName,new animalLayerAdapter(animalfactory.createAnomalies()[i].pathImageButton));
+            anomaliesAnimalbuttons.put(animalfactory.createAnomalies()[i].animalName,new buttonLayerAdapter());
+        }
 
 
         for (String animal : animalbuttons.keySet()) {
@@ -69,11 +64,27 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
             animalbuttons.get(animal).setOnAction(e -> execute(animal));
         }
 
-        this.addRow(0, animalbuttons.get(animalfactory.createLion().animalName),animalbuttons.get(animalfactory.createTiger().animalName),animalbuttons.get(animalfactory.createDeer().animalName),
-        animalbuttons.get(animalfactory.createDoll().animalName),animalbuttons.get(animalfactory.createGorilla().animalName),animalbuttons.get(animalfactory.createLight().animalName),
-        animalbuttons.get(animalfactory.createMonitor().animalName));
-        this.addRow(1, animalbuttons.get(animalfactory.createParrot().animalName),animalbuttons.get(animalfactory.createRafflesia().animalName),animalbuttons.get(animalfactory.createTrash().animalName),
-        animalbuttons.get(animalfactory.createWhale().animalName),checkAnswer);
+        for (String animal : anomaliesAnimalbuttons.keySet()) {
+            Button btn = anomaliesAnimalbuttons.get(animal);
+            ImageView imageView = anomaliesAnimalButtonImage.get(animal);
+            imageView.setFitHeight(100);
+            imageView.setPreserveRatio(true);
+            btn.setGraphic(imageView);
+            btn.setContentDisplay(ContentDisplay.TOP);
+            anomaliesAnimalbuttons.get(animal).setText(animal);
+            anomaliesAnimalbuttons.get(animal).setOnAction(e -> execute(animal));
+        }
+
+
+        for (int i = 0; i < animalfactory.createAnimals().length; i++) {
+            this.addRow(0,animalbuttons.get(animalfactory.createAnimals()[i].animalName));
+        }
+
+        for (int i = 0; i < animalfactory.createAnomalies().length; i++) {
+            this.addRow(0,anomaliesAnimalbuttons.get(animalfactory.createAnomalies()[i].animalName));
+        }
+
+        this.addRow(0,checkAnswer);
 
     }
 
@@ -112,6 +123,16 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
                 text = "Add " + animal;
             }
             animalbuttons.get(animal).setText(text);
+        }
+
+        for (String animal : anomaliesAnimalbuttons.keySet()) {
+            String text = "";
+            if (animalVisible.contains(animal)) {
+                text = "Remove " + animal;
+            } else {
+                text = "Add " + animal;
+            }
+            anomaliesAnimalbuttons.get(animal).setText(text);
         }
         
     }

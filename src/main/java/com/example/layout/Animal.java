@@ -1,15 +1,9 @@
 package com.example.layout;
 
-
-
-public abstract class Entity {
+public abstract class Animal {
     public String animalName;
     public String pathImage;
     public String pathImageButton;
     public String environment;
-    public String score;
-
-
-    // abstract int score();
-
+    public Integer score;
 }

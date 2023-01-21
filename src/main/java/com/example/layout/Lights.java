@@ -1,12 +1,11 @@
 package com.example.layout;
 
-public class Lights extends Entity {
+public class Lights extends Animal {
     
-    public Lights(String environment){
+    public Lights(){
         this.animalName = "Lights";
         this.pathImage = "images/Lights.png";
         this.pathImageButton = "images/Lights.png";
-        this.score = "10";
-        this.environment = environment;
+        this.score = 10;
     }
 }

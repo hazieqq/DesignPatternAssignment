@@ -38,8 +38,7 @@ public class VirtualSpace  {
         logger.log("---------------Game Start-----------------------");
 
 
-        Button play = new Button("PLay Game Jungle");
-        // soundoff = new Button("PLay Game Jungle");
+        Button play = new Button("PLay Game");
         Button soundoff = new Button("SOUND OFF");
         VBox vBox = new VBox(20);
         vBox.getChildren().addAll(play,soundoff);
@@ -48,6 +47,7 @@ public class VirtualSpace  {
         // Layout 1
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 1200, 800);
+        scene1.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
         layout1.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
 
         // defines dimensions of vbox so button and label can be centered

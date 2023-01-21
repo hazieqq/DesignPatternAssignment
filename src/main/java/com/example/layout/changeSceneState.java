@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import com.example.App;
 
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class changeSceneState implements State,Subscriber {
@@ -27,6 +25,7 @@ public class changeSceneState implements State,Subscriber {
     Button play,playAgain,soundoff,home;
     AnimalLayout sp;
     AnimalButtonLayout gp;
+    Functions function;
 
     public changeSceneState(Jungle firstscene,Stage stage,Scene scene1,Scene scene2){
         this.firstscene = firstscene;
@@ -38,14 +37,38 @@ public class changeSceneState implements State,Subscriber {
     @Override
     public void changeScene() {
 
-        // Layout 2
+        Button jungleGame = new Button("Jungle");
+        Button amazonGame = new Button("Amazon Jungle");
+        VBox vBox = new VBox(20);
+        vBox.getChildren().addAll(jungleGame,amazonGame);
+        vBox.setAlignment(Pos.CENTER);
+
+        // Layout 1
+        StackPane layout1 = new StackPane();
+        scene2 = new Scene(layout1, 1200, 800);
+        scene2.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
+        layout1.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
+
+        // defines dimensions of vbox so button and label can be centered
+        layout1.prefWidthProperty().bind(stage.widthProperty());
+        layout1.prefHeightProperty().bind(stage.heightProperty());
+
+        jungleGame.setOnAction(e->scene3());
+        amazonGame.setOnAction(e->scene4());
+
+
+        stage.setScene(scene2);
+        
+    }
+
+    public void scene3(){
         BorderPane bPane2 = new BorderPane();
 
-        Functions function = Functions.getInstance();
+        function = Functions.getInstance();
         
-        sp = new AnimalLayout();
+        sp = new AnimalLayout("scene3");
         
-        gp = new AnimalButtonLayout();
+        gp = new AnimalButtonLayout("scene3");
 
         function.registerSubscriber(sp);
         function.registerSubscriber(gp);
@@ -54,11 +77,28 @@ public class changeSceneState implements State,Subscriber {
         bPane2.setTop(sp);
         bPane2.setCenter(gp);
 
+        scene3 = new Scene(bPane2, 1200, 1000);
+        stage.setScene(scene3);
+    }
 
-        scene2 = new Scene(bPane2, 1200, 1000);
-        stage.setScene(scene2);
+    public void scene4(){
+        BorderPane bPane2 = new BorderPane();
+
+        function = Functions.getInstance();
         
+        sp = new AnimalLayout("scene4");
         
+        gp = new AnimalButtonLayout("scene4");
+
+        function.registerSubscriber(sp);
+        function.registerSubscriber(gp);
+        function.registerSubscriber(this);
+
+        bPane2.setTop(sp);
+        bPane2.setCenter(gp);
+
+        scene3 = new Scene(bPane2, 1200, 1000);
+        stage.setScene(scene3);
     }
 
     public Node changeBackground(String imageFile) {
@@ -82,9 +122,9 @@ public class changeSceneState implements State,Subscriber {
         
 
         playAgain = new Button("Play Again");
-        home = new Button("Home");
+        // home = new Button("Home");
         VBox vBox = new VBox(20);
-        vBox.getChildren().addAll(playAgain,home);
+        vBox.getChildren().addAll(playAgain);
         vBox.setAlignment(Pos.CENTER);
 
         // Layout 3
@@ -96,9 +136,11 @@ public class changeSceneState implements State,Subscriber {
         layout3.prefWidthProperty().bind(stage.widthProperty());
         layout3.prefHeightProperty().bind(stage.heightProperty());
 
-        playAgain.setOnAction(event -> stage.setScene(scene2));
+        function.reset();
 
-        home.setOnAction(event -> stage.setScene(scene1));
+        playAgain.setOnAction(event -> changeScene());
+
+        // home.setOnAction(event -> stage.setScene(scene1));
 
                 
         //Creating a scene object 

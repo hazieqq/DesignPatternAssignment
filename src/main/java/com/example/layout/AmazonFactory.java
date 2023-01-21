@@ -1,11 +1,11 @@
 package com.example.layout;
 
-public class JungleFactory implements AnimalFactory {
-
+public class AmazonFactory implements AnimalFactory {
 
     @Override
     public Animal[] createAnimals() {
-        Animal animal[] = { new Tiger(), new Lion(), new Deer(), new Gorilla(),new Parrot()
+
+        Animal animal[] = { new Tiger(), new Lion(), new Gorilla()
                            ,new Rafflesia()};
         return animal;
     }
@@ -19,8 +19,8 @@ public class JungleFactory implements AnimalFactory {
 
     @Override
     public Integer totalScore() {
-        return 60;
+        // TODO Auto-generated method stub
+        return 40;
     }
-
     
 }

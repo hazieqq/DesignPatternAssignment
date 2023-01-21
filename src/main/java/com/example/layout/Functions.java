@@ -38,10 +38,6 @@ public class Functions implements Publisher {
         } else {
             animalVisible.add(animal);
         }
-        // animalImage.toggleVisibility(animal);
-        // System.out.println(text);
-        // System.out.println(animal);
-        // textAndAnimal.put(animal, text);
         notifySubscriber();
     }
 
@@ -81,6 +77,10 @@ public class Functions implements Publisher {
         //     subs.updateScore();
         // }
         
+    }
+
+    public void reset(){
+        animalVisible.clear();
     }
     
 
