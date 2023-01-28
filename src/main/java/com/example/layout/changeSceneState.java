@@ -133,11 +133,13 @@ public class changeSceneState implements State, Subscriber {
 
         System.out.println("Score : " + sp.getScore());
         if (sp.getScore() == 50) {
-            t.setText("Points: " + sp.getScore() + "/50");
+            t.setText("Correct: " + totalCorrect() + "/" + sp.getAnimalVisible().size() + "\nIncorrect: "
+                    + totalIncorrect() + "/" + sp.getAnimalVisible().size());
             layout3.getChildren().addAll(changeBackground("images/WinnerPage.png"), vBox);
         } else {
-            t.setText("Total Correct: " + sp.getScore());
-            t.setText("Total Incorrect: " + sp.getScore());
+            t.setText("Correct: " + totalCorrect() + "/" + sp.getAnimalVisible().size() + "\nIncorrect: "
+                    + totalIncorrect() + "/" + sp.getAnimalVisible().size());
+            // t.setText("Total Incorrect: " + sp.getScore());
             layout3.getChildren().addAll(changeBackground("images/LoserPage.png"), vBox);
         }
 
@@ -174,8 +176,32 @@ public class changeSceneState implements State, Subscriber {
         return iv;
     }
 
-    // public int totalCorrect() {
-    // }
-    
+    public int totalCorrect() {
+        ArrayList<String> selectedAnswer = sp.getAnimalVisible();
+        ArrayList<String> compareAnswer = new ArrayList<String>(sp.getAnimalImage());
+        int counter = 0;
+
+        for (String s : selectedAnswer) {
+            if (compareAnswer.contains(s)) {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    public int totalIncorrect() {
+        ArrayList<String> selectedAnswer = sp.getAnimalVisible();
+        ArrayList<String> compareAnswer = new ArrayList<String>(sp.getAnimalImageAnomalies());
+        int counter = 0;
+
+        for (String s : selectedAnswer) {
+            if (compareAnswer.contains(s)) {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
 
 }

@@ -146,8 +146,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
 
     @Override
     public void updateScore() {
-    }
 
-     
+    }
 
 }
