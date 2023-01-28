@@ -3,7 +3,7 @@ package com.example.layout;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Jungle {
+public class Game {
     State changeSceneState;
 
     State state;
@@ -12,7 +12,7 @@ public class Jungle {
     Scene scene1;
     Scene scene2;
 
-    public Jungle(Stage stage,Scene scene1,Scene scene2){
+    public Game(Stage stage,Scene scene1,Scene scene2){
         changeSceneState = new changeSceneState(this,stage,scene1,scene2);
         state = changeSceneState;
     }

@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class changeSceneState implements State, Subscriber {
 
-    Jungle firstscene;
+    Game firstscene;
 
     Stage stage;
     Scene scene1, scene2, scene3;
@@ -29,7 +29,7 @@ public class changeSceneState implements State, Subscriber {
     AnimalButtonLayout gp;
     Functions function;
 
-    public changeSceneState(Jungle firstscene, Stage stage, Scene scene1, Scene scene2) {
+    public changeSceneState(Game firstscene, Stage stage, Scene scene1, Scene scene2) {
         this.firstscene = firstscene;
         this.stage = stage;
         this.scene1 = scene1;
@@ -203,5 +203,6 @@ public class changeSceneState implements State, Subscriber {
 
         return counter;
     }
+
 
 }

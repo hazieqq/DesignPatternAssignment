@@ -20,6 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         // facade design pattern
         vs = new VirtualSpace(stage);
+        stage.setTitle("Scramblo");
         vs.start();
 
     }

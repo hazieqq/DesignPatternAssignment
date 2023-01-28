@@ -18,7 +18,7 @@ import com.example.App;
 import com.example.Log.Logger;
 import com.example.Log.LoggerFactory;
 import com.example.Log.LoggerTestFactory;
-import com.example.layout.Jungle;
+import com.example.layout.Game;
 
 public class VirtualSpace {
 
@@ -65,14 +65,13 @@ public class VirtualSpace {
         layout1.prefHeightProperty().bind(stage.heightProperty());
 
         // State design pattern
-        Jungle jungle = new Jungle(stage, scene1, scene2);
+        Game jungle = new Game(stage, scene1, scene2);
 
         play.setOnAction(e -> jungle.changeScene());
 
         sound.setOnAction(e -> stopSound());
 
         stage.setScene(scene1);
-        stage.setTitle("Scramblo");
         stage.setResizable(false);
         stage.show();
 
