@@ -1,6 +1,6 @@
 package com.example.layout;
 
-public class Rafflesia extends Animal {
+public class Rafflesia extends Entity {
 
     public Rafflesia() {
         this.animalName = "Rafflesia";

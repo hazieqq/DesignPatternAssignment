@@ -1,6 +1,6 @@
 package com.example.layout;
 
-public class Whale extends Animal {
+public class Whale extends Entity {
     
 
     public Whale() {

@@ -1,6 +1,5 @@
 package com.example.app;
 
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,17 +14,15 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-
 import com.example.App;
 import com.example.Log.Logger;
 import com.example.Log.LoggerFactory;
 import com.example.Log.LoggerTestFactory;
 import com.example.layout.Jungle;
 
+public class VirtualSpace {
 
-public class VirtualSpace  {
-
-    private static Scene scene1,scene2;
+    private static Scene scene1, scene2;
     private Stage stage;
     private LoggerTestFactory loggerTestFactory;
     public Logger logger;
@@ -42,15 +39,14 @@ public class VirtualSpace  {
         this.checkSound = false;
     }
 
-    public void start() throws IOException  {     
+    public void start() throws IOException {
         logger.log("---------------Game Start-----------------------");
-
 
         Button play = new Button("PLAY GAME");
         sound = new Button("SOUND OFF");
-        
+
         VBox vBox = new VBox(20);
-        vBox.getChildren().addAll(play,sound);
+        vBox.getChildren().addAll(play, sound);
         vBox.setAlignment(Pos.CENTER);
 
         mediaPlayer.setVolume(1);
@@ -62,31 +58,27 @@ public class VirtualSpace  {
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 1200, 800);
         scene1.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
-        layout1.getChildren().addAll(changeBackground("images/WelcomePage1.png"), vBox);
+        layout1.getChildren().addAll(changeBackground("images/WelcomePage.png"), vBox);
 
         // defines dimensions of vbox so button and label can be centered
         layout1.prefWidthProperty().bind(stage.widthProperty());
         layout1.prefHeightProperty().bind(stage.heightProperty());
 
-        // State design pattern 
-        Jungle jungle = new Jungle(stage,scene1,scene2);
-        
+        // State design pattern
+        Jungle jungle = new Jungle(stage, scene1, scene2);
 
+        play.setOnAction(e -> jungle.changeScene());
 
-        play.setOnAction(e->jungle.changeScene());
-
-        sound.setOnAction(e->stopSound());
+        sound.setOnAction(e -> stopSound());
 
         stage.setScene(scene1);
         stage.setTitle("Scramblo");
         stage.setResizable(false);
         stage.show();
 
-        
-        
     }
 
-    public void stopSound(){
+    public void stopSound() {
         if (checkSound) {
             mediaPlayer.stop();
             sound.setText("SOUND ON");
@@ -108,7 +100,4 @@ public class VirtualSpace  {
         return iv;
     }
 
-    
-
-    
 }

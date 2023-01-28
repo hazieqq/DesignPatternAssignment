@@ -2,18 +2,16 @@ package com.example.layout;
 
 public class JungleFactory implements AnimalFactory {
 
-
     @Override
-    public Animal[] createAnimals() {
-        Animal animal[] = { new Tiger(), new Lion(), new Deer(), new Gorilla(),new Parrot()
-                           ,new Rafflesia()};
+    public Entity[] createAnimals() {
+        Entity animal[] = { new Tiger(), new Deer(), new Gorilla(), new Parrot(), new Rafflesia() };
         return animal;
     }
 
     @Override
-    public Animal[] createAnomalies() {
-        Animal animal[] = { new Whale()};
-        
+    public Entity[] createAnomalies() {
+        Entity animal[] = { new Whale(), new Monitor(), new Doll(), new Lights(), new Trash() };
+
         return animal;
     }
 
@@ -22,5 +20,4 @@ public class JungleFactory implements AnimalFactory {
         return 60;
     }
 
-    
 }

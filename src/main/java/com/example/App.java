@@ -1,6 +1,5 @@
 package com.example;
 
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -8,6 +7,7 @@ import java.io.IOException;
 
 import com.example.Log.LoggerTestFactory;
 import com.example.app.VirtualSpace;
+
 /**
  * JavaFX App
  */
@@ -21,11 +21,10 @@ public class App extends Application {
         // facade design pattern
         vs = new VirtualSpace(stage);
         vs.start();
-        
+
     }
 
-    
-    public static void main(String[] args) {     
+    public static void main(String[] args) {
         launch();
     }
 

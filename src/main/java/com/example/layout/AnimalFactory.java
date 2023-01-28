@@ -1,7 +1,7 @@
 package com.example.layout;
 
 public interface AnimalFactory {
-    public Animal[] createAnimals();
-    public Animal[] createAnomalies();
+    public Entity[] createAnimals();
+    public Entity[] createAnomalies();
     public Integer totalScore();
 }
