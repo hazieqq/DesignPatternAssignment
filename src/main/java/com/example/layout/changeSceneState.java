@@ -134,6 +134,13 @@ public class changeSceneState implements State, Subscriber {
         scene3 = new Scene(layout3, 1200, 800);
         scene3.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
 
+        int total;
+        if (sp.getAnimalVisible() == null) {
+            total = 0;
+        } else {
+            total = sp.getAnimalVisible().size();
+        }
+
         System.out.println("Score : " + sp.getScore());
         if (sp.getScore() == 50) {
             previousPlayer = mediaPlayer;
@@ -141,7 +148,7 @@ public class changeSceneState implements State, Subscriber {
             mediaPlayer = new MediaPlayer(new Media(App.class.getResource("music/won.mp3").toExternalForm()));
             mediaPlayer.setVolume(1);
             mediaPlayer.play();
-            t.setText("\n\n\nSelected Images: "+sp.getAnimalVisible().size()+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
+            t.setText("\n\n\nSelected Images: "+total+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
                     + totalIncorrect());
             layout3.getChildren().addAll(changeBackground("images/WinnerPage.png"), vBox);
         } else {
@@ -151,7 +158,7 @@ public class changeSceneState implements State, Subscriber {
             mediaPlayer.setVolume(1);
             mediaPlayer.play();
 
-            t.setText("\n\n\nSelected Images: "+sp.getAnimalVisible().size()+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
+            t.setText("\n\n\nSelected Images: "+total+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
                     + totalIncorrect());
             // t.setText("Total Incorrect: " + sp.getScore());
             layout3.getChildren().addAll(changeBackground("images/LoserPage.png"), vBox);
