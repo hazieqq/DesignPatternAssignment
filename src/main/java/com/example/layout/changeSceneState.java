@@ -2,6 +2,7 @@ package com.example.layout;
 
 import java.util.ArrayList;
 
+
 import com.example.App;
 
 import javafx.geometry.Pos;
@@ -13,10 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class changeSceneState implements State, Subscriber {
 
@@ -28,12 +32,15 @@ public class changeSceneState implements State, Subscriber {
     AnimalLayout sp;
     AnimalButtonLayout gp;
     Functions function;
+    private MediaPlayer mediaPlayer;
+    MediaPlayer previousPlayer;
 
-    public changeSceneState(Game firstscene, Stage stage, Scene scene1, Scene scene2) {
+    public changeSceneState(Game firstscene, Stage stage, Scene scene1, Scene scene2, MediaPlayer mediaPlayer) {
         this.firstscene = firstscene;
         this.stage = stage;
         this.scene1 = scene1;
         this.scene2 = scene2;
+        this.mediaPlayer = mediaPlayer;
     }
 
     @Override
@@ -111,14 +118,10 @@ public class changeSceneState implements State, Subscriber {
     @Override
     public void updateScore() {
 
-        System.out.println(sp.getAnimalVisible());
-        System.out.println(sp.getAnimalImage());
-        System.out.println(sp.getAnimalImageAnomalies());
         playAgain = new Button("Play Again");
 
         Text t = new Text();
         t.setFont(Font.font("Comic Sans MS", 30));
-        // t.setFill(Color.GRAY);
         t.setLayoutX(100);
         t.setLayoutY(100);
         // home = new Button("Home");
@@ -133,12 +136,23 @@ public class changeSceneState implements State, Subscriber {
 
         System.out.println("Score : " + sp.getScore());
         if (sp.getScore() == 50) {
-            t.setText("Correct: " + totalCorrect() + "/" + sp.getAnimalVisible().size() + "\nIncorrect: "
-                    + totalIncorrect() + "/" + sp.getAnimalVisible().size());
+            previousPlayer = mediaPlayer;
+            // add won music
+            mediaPlayer = new MediaPlayer(new Media(App.class.getResource("music/won.mp3").toExternalForm()));
+            mediaPlayer.setVolume(1);
+            mediaPlayer.play();
+            t.setText("\n\n\nSelected Images: "+sp.getAnimalVisible().size()+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
+                    + totalIncorrect());
             layout3.getChildren().addAll(changeBackground("images/WinnerPage.png"), vBox);
         } else {
-            t.setText("Correct: " + totalCorrect() + "/" + sp.getAnimalVisible().size() + "\nIncorrect: "
-                    + totalIncorrect() + "/" + sp.getAnimalVisible().size());
+            previousPlayer = mediaPlayer;
+            // add lose music
+            mediaPlayer = new MediaPlayer(new Media(App.class.getResource("music/lose.mp3").toExternalForm()));
+            mediaPlayer.setVolume(1);
+            mediaPlayer.play();
+
+            t.setText("\n\n\nSelected Images: "+sp.getAnimalVisible().size()+" \nCorrect: " + totalCorrect() +  "\nIncorrect: "
+                    + totalIncorrect());
             // t.setText("Total Incorrect: " + sp.getScore());
             layout3.getChildren().addAll(changeBackground("images/LoserPage.png"), vBox);
         }
@@ -177,9 +191,14 @@ public class changeSceneState implements State, Subscriber {
     }
 
     public int totalCorrect() {
+        int counter = 0;
+        if (sp.getAnimalVisible() == null){
+            return counter;
+        }
+
         ArrayList<String> selectedAnswer = sp.getAnimalVisible();
         ArrayList<String> compareAnswer = new ArrayList<String>(sp.getAnimalImage());
-        int counter = 0;
+        
 
         for (String s : selectedAnswer) {
             if (compareAnswer.contains(s)) {
@@ -191,9 +210,13 @@ public class changeSceneState implements State, Subscriber {
     }
 
     public int totalIncorrect() {
+        int counter = 0;
+        if (sp.getAnimalVisible() == null){
+            return counter;
+        }
+
         ArrayList<String> selectedAnswer = sp.getAnimalVisible();
         ArrayList<String> compareAnswer = new ArrayList<String>(sp.getAnimalImageAnomalies());
-        int counter = 0;
 
         for (String s : selectedAnswer) {
             if (compareAnswer.contains(s)) {

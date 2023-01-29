@@ -65,9 +65,9 @@ public class VirtualSpace {
         layout1.prefHeightProperty().bind(stage.heightProperty());
 
         // State design pattern
-        Game jungle = new Game(stage, scene1, scene2);
+        Game game = new Game(stage, scene1, scene2,mediaPlayer);
 
-        play.setOnAction(e -> jungle.changeScene());
+        play.setOnAction(e -> game.changeScene());
 
         sound.setOnAction(e -> stopSound());
 
@@ -79,6 +79,7 @@ public class VirtualSpace {
 
     public void stopSound() {
         if (checkSound) {
+            // System.out.println(mediaPlayer.getStatus());
             mediaPlayer.stop();
             sound.setText("SOUND ON");
             checkSound = false;

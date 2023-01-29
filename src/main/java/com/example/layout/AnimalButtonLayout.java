@@ -16,11 +16,13 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
     private HashMap<String, animalLayerAdapter> animalButtonsImage;
     private HashMap<String, animalLayerAdapter> anomaliesAnimalButtonImage;
     public AnimalLayout animallayout;
+    public String scene;
 
     // Button undobutton;
     // private Button soundBtn;
 
     public AnimalButtonLayout(String scene) {
+        this.scene = scene;
         if (scene == "scene3") {
             menuBackground();
             button(new JungleFactory());
@@ -36,6 +38,9 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         // Button checkAnswer = new Button("Check Answer");
         buttonLayerAdapter checkAnswer = new buttonLayerAdapter("Check Answer");
         checkAnswer.setOnAction(e -> executeScore());
+
+        // buttonLayerAdapter soundOff = new buttonLayerAdapter("Sound Off");
+        // soundOff.setOnAction(e -> executeSound(soundOff));
 
         animalButtonsImage = new HashMap<>();
         anomaliesAnimalButtonImage = new HashMap<>();
@@ -88,6 +93,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         this.addRow(0, checkAnswer);
 
     }
+
 
     private void executeScore() {
         Functions.getInstance().updateScore();

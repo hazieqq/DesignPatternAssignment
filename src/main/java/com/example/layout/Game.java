@@ -1,6 +1,7 @@
 package com.example.layout;
 
 import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Game {
@@ -12,8 +13,8 @@ public class Game {
     Scene scene1;
     Scene scene2;
 
-    public Game(Stage stage,Scene scene1,Scene scene2){
-        changeSceneState = new changeSceneState(this,stage,scene1,scene2);
+    public Game(Stage stage,Scene scene1,Scene scene2, MediaPlayer mediaPlayer){
+        changeSceneState = new changeSceneState(this,stage,scene1,scene2,mediaPlayer);
         state = changeSceneState;
     }
 
