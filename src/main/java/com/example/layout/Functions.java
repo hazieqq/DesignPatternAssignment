@@ -23,7 +23,7 @@ public class Functions implements Publisher {
     }
 
 
-    public static Functions getInstance() {
+    public static synchronized Functions getInstance() {
         if (uniqueInstance == null) {
             // uniqueInstance = new Functions(new AnimalLayout());
             uniqueInstance = new Functions();
