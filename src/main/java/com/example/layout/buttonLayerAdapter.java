@@ -10,7 +10,7 @@ public class buttonLayerAdapter extends Button {
         super();
         shadow = new DropShadow();
         this.setEffect(shadow);
-        // this.setMaxWidth(100);
+        this.setMaxWidth(100);
         this.setMinSize(150, 50);
         this.setStyle("-fx-background-color: #0099e5; -fx-text-fill: #ffffff; -fx-font-size: 15px;");
     }
@@ -21,6 +21,6 @@ public class buttonLayerAdapter extends Button {
         this.setEffect(shadow);
         this.setMinSize(100, 50);
         this.setStyle("-fx-background-color: #00ad2e; -fx-text-fill: #000000; -fx-font-size: 15px;");
-        // this.setMaxSize(300, 500);
+        this.setMaxSize(300, 500);
     }
 }

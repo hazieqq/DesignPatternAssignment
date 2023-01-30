@@ -55,7 +55,7 @@ public class changeSceneState implements State, Subscriber {
 
         // Layout 1
         StackPane layout1 = new StackPane();
-        scene2 = new Scene(layout1, 1200, 800);
+        scene2 = new Scene(layout1, 700, 620);
         scene2.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
         layout1.getChildren().addAll(changeBackground("images/EnvironmentSelectionPage.png"), vBox);
 
@@ -87,7 +87,7 @@ public class changeSceneState implements State, Subscriber {
         bPane2.setTop(sp);
         bPane2.setCenter(gp);
 
-        scene3 = new Scene(bPane2, 1200, 1000);
+        scene3 = new Scene(bPane2, 700, 750);
         stage.setScene(scene3);
     }
 
@@ -107,7 +107,7 @@ public class changeSceneState implements State, Subscriber {
         bPane2.setTop(sp);
         bPane2.setCenter(gp);
 
-        scene3 = new Scene(bPane2, 1200, 1000);
+        scene3 = new Scene(bPane2, 700, 750);
         stage.setScene(scene3);
     }
 
@@ -131,7 +131,7 @@ public class changeSceneState implements State, Subscriber {
 
         // Layout 3
         StackPane layout3 = new StackPane();
-        scene3 = new Scene(layout3, 1200, 800);
+        scene3 = new Scene(layout3, 700, 620);
         scene3.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
 
         int total;

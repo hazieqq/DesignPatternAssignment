@@ -48,15 +48,15 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         anomaliesAnimalbuttons = new HashMap<>();
 
         for (int i = 0; i < animalfactory.createAnimals().length; i++) {
-            animalButtonsImage.put(animalfactory.createAnimals()[i].animalName,
-                    new animalLayerAdapter(animalfactory.createAnimals()[i].pathImageButton));
+            // animalButtonsImage.put(animalfactory.createAnimals()[i].animalName,
+            //         new animalLayerAdapter(animalfactory.createAnimals()[i].pathImageButton));
             animalbuttons.put(animalfactory.createAnimals()[i].animalName, new buttonLayerAdapter());
             // System.out.println(animalfactory.createAnimals()[i].animalName);
         }
 
         for (int i = 0; i < animalfactory.createAnomalies().length; i++) {
-            anomaliesAnimalButtonImage.put(animalfactory.createAnomalies()[i].animalName,
-                    new animalLayerAdapter(animalfactory.createAnomalies()[i].pathImageButton));
+            // anomaliesAnimalButtonImage.put(animalfactory.createAnomalies()[i].animalName,
+            //         new animalLayerAdapter(animalfactory.createAnomalies()[i].pathImageButton));
             anomaliesAnimalbuttons.put(animalfactory.createAnomalies()[i].animalName, new buttonLayerAdapter());
         }
 
@@ -83,14 +83,24 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         }
 
         for (int i = 0; i < animalfactory.createAnimals().length; i++) {
-            this.addRow(0, animalbuttons.get(animalfactory.createAnimals()[i].animalName));
+            if (i <= 3) {
+                this.addRow(0, animalbuttons.get(animalfactory.createAnimals()[i].animalName));
+            } else {
+                this.addRow(1, animalbuttons.get(animalfactory.createAnimals()[i].animalName));   
+            }
+            
         }
 
         for (int i = 0; i < animalfactory.createAnomalies().length; i++) {
-            this.addRow(1, anomaliesAnimalbuttons.get(animalfactory.createAnomalies()[i].animalName));
+            if(i <= 2){
+                this.addRow(1, anomaliesAnimalbuttons.get(animalfactory.createAnomalies()[i].animalName));
+            } else {
+                this.addRow(2, anomaliesAnimalbuttons.get(animalfactory.createAnomalies()[i].animalName));
+            }
+            
         }
 
-        this.addRow(0, checkAnswer);
+        this.addRow(2, checkAnswer);
 
     }
 
@@ -110,7 +120,7 @@ public class AnimalButtonLayout extends GridPane implements Subscriber {
         this.getColumnConstraints().addAll(c, c, c, c, c, c);
         this.setPadding(new Insets(20));
         this.setAlignment(Pos.CENTER);
-        this.setVgap(15);
+        this.setVgap(25);
         this.setHgap(1);
 
         // Image image = new

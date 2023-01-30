@@ -56,7 +56,7 @@ public class VirtualSpace {
         checkSound = true;
         // Layout 1
         StackPane layout1 = new StackPane();
-        scene1 = new Scene(layout1, 1200, 800);
+        scene1 = new Scene(layout1, 700, 620);
         scene1.getStylesheets().add(App.class.getResource("style/button.css").toExternalForm());
         layout1.getChildren().addAll(changeBackground("images/WelcomePage.png"), vBox);
 
