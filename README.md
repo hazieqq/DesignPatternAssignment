@@ -10,3 +10,4 @@ interesting space.**
 3. Singleton
 4. Facade
 5. Observer
+6. State
